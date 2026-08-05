@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Portfolio</title>
+<meta name="description" content="Personal portfolio and resume site.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo">YN</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section id="top" class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Hi, I'm</p>
+      <h1>Your Name</h1>
+      <p class="tagline">Your Title — e.g. Software Engineer / Designer / Student</p>
+      <p class="hero-blurb">
+        One or two sentences about what you do and what you're looking for.
+        Keep it short — this is the line people read first.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects">See my work</a>
+        <a class="btn btn-secondary" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap">
+      <h2>About</h2>
+      <p>
+        Write a short paragraph about yourself here — your background, what you're
+        currently working on, and what interests you. Two to four sentences is plenty;
+        recruiters and visitors skim.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <ul class="tag-list">
+        <li>Skill One</li>
+        <li>Skill Two</li>
+        <li>Skill Three</li>
+        <li>Skill Four</li>
+        <li>Skill Five</li>
+        <li>Skill Six</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <div class="card-grid">
+
+        <article class="card">
+          <h3>Project One</h3>
+          <p>One or two sentences describing the project, what it does, and what you used to build it.</p>
+          <div class="card-links">
+            <a href="#">Code</a>
+            <a href="#">Live demo</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Project Two</h3>
+          <p>One or two sentences describing the project, what it does, and what you used to build it.</p>
+          <div class="card-links">
+            <a href="#">Code</a>
+            <a href="#">Live demo</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Project Three</h3>
+          <p>One or two sentences describing the project, what it does, and what you used to build it.</p>
+          <div class="card-links">
+            <a href="#">Code</a>
+            <a href="#">Live demo</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="wrap">
+      <h2>Get in touch</h2>
+      <p>The best way to reach me:</p>
+      <ul class="contact-list">
+        <li><a href="mailto:you@example.com">you@example.com</a></li>
+        <li><a href="https://github.com/h4l" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Your Name. Built with GitHub Pages.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
