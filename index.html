@@ -7,91 +7,95 @@
 <meta name="description" content="Personal portfolio and resume site.">
 <link rel="stylesheet" href="style.css">
 <script src="hal-favicon.js"></script>
+<script src="theme-toggle.js"></script>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="wrap header-inner">
-    <a href="#top" class="logo">HAL</a>
-    <nav>
-      <a href="about.html">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
+<div class="wrap header-inner">
+<div class="logo-group">
+<a href="#top" class="logo">HAL</a>
+<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">Dark mode</button>
+</div>
+<nav>
+<a href="about.html">About</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</nav>
+</div>
 </header>
 
 <main>
 
-  <section id="top" class="hero">
-    <div class="wrap">
-      <p class="eyebrow">Hi, I'm</p>
-      <h1>Harry</h1>
-      <p class="tagline">BSc Physics Graduate, University of Leeds</p>
-      <p class="hero-blurb">
-    </div>
-  </section>
+<section id="top" class="hero">
+<div class="wrap">
+<p class="eyebrow">Hi, I'm</p>
+<h1>Harry</h1>
+<p class="tagline">BSc Physics Graduate, University of Leeds</p>
+<p class="hero-blurb">
+</div>
+</section>
 
-  <section id="projects" class="section">
-    <div class="wrap">
-      <h2>Projects</h2>
-      <div class="card-grid">
+<section id="projects" class="section">
+<div class="wrap">
+<h2>Projects</h2>
+<div class="card-grid">
 
-        <article class="card">
-          <h3>Jot_</h3>
-          <p>The all in one Email/note scribing desktop app powered by Claude Sonnet.</p>
-          <div class="card-links">
-            
-            <a href="https://flying-sun-2a4.notion.site/Jot-3762d113328580aeb79beb2bd2df215f?source=copy_link">About</a>
-            <a href="https://github.com/h4l-git/Jot_/blob/main/jot8.14.3.py">Code</a>
-            <a href="https://github.com/h4l-git/Jot_">Repo</a>
-          </div>
-        </article>
+<article class="card">
+<h3>Jot_</h3>
+<p>The all in one Email/note scribing desktop app powered by Claude Sonnet.</p>
+<div class="card-links">
 
-        <article class="card">
-          <h3>ResearchRef</h3>
-          <p>ResearchRef given several research article links, can generate a fully valid reference list to paste onto any scientific research paper/article</p>
-          <div class="card-links">
-            <a href="https://github.com/h4l-git/ResearchRef/blob/main/index.html">Code</a>
-            <a href="https://h4l-git.github.io/ResearchRef/">ResearchRef</a>
-            <a href="https://github.com/h4l-git/ResearchRef">Repo</a>
-          </div>
-        </article>
+<a href="https://flying-sun-2a4.notion.site/Jot-3762d113328580aeb79beb2bd2df215f?source=copy_link">About</a>
+<a href="https://github.com/h4l-git/Jot_/blob/main/jot8.14.3.py">Code</a>
+<a href="https://github.com/h4l-git/Jot_">Repo</a>
+</div>
+</article>
 
-        <article class="card">
-          <h3>Project Three</h3>
-          <p>One or two sentences describing the project, what it does, and what you used to build it.</p>
-          <div class="card-links">
-            <a href="#">Code</a>
-            <a href="#">Live demo</a>
-          </div>
-        </article>
+<article class="card">
+<h3>ResearchRef</h3>
+<p>ResearchRef given several research article links, can generate a fully valid reference list to paste onto any scientific research paper/article</p>
+<div class="card-links">
+<a href="https://github.com/h4l-git/ResearchRef/blob/main/index.html">Code</a>
+<a href="https://h4l-git.github.io/ResearchRef/">ResearchRef</a>
+<a href="https://github.com/h4l-git/ResearchRef">Repo</a>
+</div>
+</article>
 
-      </div>
-    </div>
-  </section>
+<article class="card">
+<h3>Project Three</h3>
+<p>One or two sentences describing the project, what it does, and what you used to build it.</p>
+<div class="card-links">
+<a href="#">Code</a>
+<a href="#">Live demo</a>
+</div>
+</article>
 
-  <section id="contact" class="section">
-    <div class="wrap">
-      <h2>Get in touch</h2>
-      <ul class="contact-list">
-        <li><a href="mailto:you@example.com">harryalees@me.com</a></li>
-        <li><a href="https://github.com/h4l-git" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/harry-lees-015ab5262/" target="_blank" rel="noopener">LinkedIn</a></li>
-      </ul>
-    </div>
-  </section>
+</div>
+</div>
+</section>
+
+<section id="contact" class="section">
+<div class="wrap">
+<h2>Get in touch</h2>
+<ul class="contact-list">
+<li><a href="mailto:you@example.com">harryalees@me.com</a></li>
+<li><a href="https://github.com/h4l-git" target="_blank" rel="noopener">GitHub</a></li>
+<li><a href="https://www.linkedin.com/in/harry-lees-015ab5262/" target="_blank" rel="noopener">LinkedIn</a></li>
+</ul>
+</div>
+</section>
 
 </main>
 
 <footer class="site-footer">
-  <div class="wrap">
-    <p>&copy; <span id="year"></span> Harry Lees. Built with GitHub Pages.</p>
-  </div>
+<div class="wrap">
+<p>&copy; <span id="year"></span> Harry Lees. Built with GitHub Pages.</p>
+</div>
 </footer>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>
