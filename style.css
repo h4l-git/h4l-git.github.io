@@ -383,6 +383,8 @@ color: var(--text-muted);
 font-size: 0.85rem;
 flex-shrink: 0;
 overflow: hidden;
+position: relative;
+z-index: 5;
 }
 
 .footer-inner {
@@ -414,6 +416,14 @@ color: var(--text-muted);
 .footer-links a:hover {
 color: var(--text);
 text-decoration: none;
+}
+
+.footer-email {
+cursor: pointer;
+}
+
+.footer-email:hover {
+text-decoration: underline;
 }
 
 .footer-icon {
