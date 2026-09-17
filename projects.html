@@ -25,10 +25,18 @@
 </header>
 
 <main>
-<section class="page-main">
+<section class="page-main projects-page">
 <div class="wrap">
-<h2>Projects</h2>
-<div class="card-grid">
+<h2 id="projects-heading">Projects</h2>
+<div
+  class="project-wheel"
+  data-project-wheel
+  tabindex="0"
+  aria-labelledby="projects-heading"
+  aria-describedby="project-wheel-help"
+>
+<p class="visually-hidden" id="project-wheel-help">Scroll, swipe, or use the arrow keys to move between projects. The front card is in focus; cards behind stay blurred.</p>
+<div class="project-wheel-stage">
 
 <article class="card">
 <h3>Jot_</h3>
@@ -72,6 +80,11 @@
 </article>
 
 </div>
+<div class="project-wheel-controls">
+<p class="project-wheel-hint">Scroll to browse</p>
+<div class="project-wheel-dots"></div>
+</div>
+</div>
 </div>
 </section>
 </main>
@@ -94,6 +107,7 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+<script src="project-wheel.js"></script>
 
 </body>
 </html>
