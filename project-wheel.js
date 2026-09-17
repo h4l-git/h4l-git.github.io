@@ -1,7 +1,7 @@
 (function () {
-  var STEP_PX = 138;
-  var DEPTH_PX = 200;
-  var TILT_DEG = 32;
+  var STEP_PX = 108;
+  var DEPTH_PX = 190;
+  var TILT_DEG = 28;
   var SNAP_MS = 420;
   var WHEEL_THRESHOLD = 36;
   var TOUCH_THRESHOLD = 36;
@@ -101,8 +101,10 @@
         var opacity = abs > 2.15 ? 0 : Math.max(0.28, 1 - abs * 0.22);
         var isFront = index === active;
 
-        card.style.transform =
-          'translate(-50%, -50%) translate3d(0, ' + y + 'px, ' + z + 'px) rotateX(' + rotateX + 'deg) scale(' + scale + ')';
+        card.style.setProperty('--wheel-y', y + 'px');
+        card.style.setProperty('--wheel-z', z + 'px');
+        card.style.setProperty('--wheel-rx', rotateX + 'deg');
+        card.style.setProperty('--wheel-scale', String(scale));
         card.style.filter = isFront || !blur ? 'none' : 'blur(' + blur + 'px)';
         card.style.opacity = String(opacity);
         card.style.zIndex = String(Math.round(80 - abs * 20));
@@ -227,7 +229,6 @@
       else if (event.clientY > rect.bottom) step(1);
     });
 
-    root.classList.add('is-ready');
     render();
   }
 
