@@ -418,6 +418,9 @@ text-decoration: none;
 
 .footer-email {
 cursor: pointer;
+pointer-events: auto;
+position: relative;
+z-index: 1;
 }
 
 .footer-email:hover {
