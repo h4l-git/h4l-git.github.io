@@ -171,6 +171,15 @@ border: 1px solid var(--border);
 }
 .btn-secondary:hover { background: var(--bg-alt); }
 
+.page-main {
+padding: 48px 0 64px;
+}
+
+.page-main h2 {
+font-size: 1.5rem;
+margin: 0 0 20px;
+}
+
 .section {
 padding: 56px 0;
 border-top: 1px solid var(--border);
