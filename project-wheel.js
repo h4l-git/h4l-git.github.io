@@ -1,7 +1,7 @@
 (function () {
-  var STEP_PX = 118;
-  var DEPTH_PX = 170;
-  var TILT_DEG = 26;
+  var STEP_PX = 138;
+  var DEPTH_PX = 200;
+  var TILT_DEG = 32;
   var SNAP_MS = 420;
   var WHEEL_THRESHOLD = 36;
   var TOUCH_THRESHOLD = 36;
@@ -97,8 +97,8 @@
         var z = -abs * DEPTH_PX;
         var rotateX = offset * -TILT_DEG;
         var scale = Math.max(0.78, 1 - abs * 0.1);
-        var blur = abs < 0.04 ? 0 : Math.min(9, 1.1 + abs * 3.4);
-        var opacity = abs > 2.15 ? 0 : Math.max(0.18, 1 - abs * 0.3);
+        var blur = abs < 0.04 ? 0 : Math.min(6.5, 0.7 + abs * 2.6);
+        var opacity = abs > 2.15 ? 0 : Math.max(0.28, 1 - abs * 0.22);
         var isFront = index === active;
 
         card.style.transform =
@@ -210,12 +210,21 @@
         suppressClick = false;
         return;
       }
+      if (event.target.closest('.project-wheel-controls')) return;
+      var active = roundedIndex(target);
       var card = event.target.closest('.card');
-      if (!card || !root.contains(card)) return;
-      var index = Number(card.dataset.wheelIndex);
-      if (index === roundedIndex(target)) return;
-      event.preventDefault();
-      goTo(index);
+      if (card && root.contains(card)) {
+        var index = Number(card.dataset.wheelIndex);
+        if (index === active) return;
+        event.preventDefault();
+        goTo(index);
+        return;
+      }
+      var activeCard = cards[active];
+      if (!activeCard) return;
+      var rect = activeCard.getBoundingClientRect();
+      if (event.clientY < rect.top) step(-1);
+      else if (event.clientY > rect.bottom) step(1);
     });
 
     root.classList.add('is-ready');
