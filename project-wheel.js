@@ -1,10 +1,10 @@
 (function () {
-  var STEP_PX = 138;
-  var DEPTH_PX = 200;
-  var TILT_DEG = 32;
-  var SNAP_MS = 420;
-  var WHEEL_THRESHOLD = 36;
-  var TOUCH_THRESHOLD = 36;
+  var STEP_PX = 108;
+  var DEPTH_PX = 190;
+  var TILT_DEG = 28;
+  var SNAP_MS = 240;
+  var WHEEL_THRESHOLD = 12;
+  var TOUCH_THRESHOLD = 24;
 
   function prefersReducedMotion() {
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -101,12 +101,15 @@
         var opacity = abs > 2.15 ? 0 : Math.max(0.28, 1 - abs * 0.22);
         var isFront = index === active;
 
-        card.style.transform =
-          'translate(-50%, -50%) translate3d(0, ' + y + 'px, ' + z + 'px) rotateX(' + rotateX + 'deg) scale(' + scale + ')';
+        card.style.setProperty('--wheel-y', y + 'px');
+        card.style.setProperty('--wheel-z', z + 'px');
+        card.style.setProperty('--wheel-rx', rotateX + 'deg');
+        card.style.setProperty('--wheel-scale', String(scale));
         card.style.filter = isFront || !blur ? 'none' : 'blur(' + blur + 'px)';
         card.style.opacity = String(opacity);
         card.style.zIndex = String(Math.round(80 - abs * 20));
         card.classList.toggle('is-active', isFront);
+        card.style.pointerEvents = isFront ? 'auto' : 'none';
         card.setAttribute('aria-selected', isFront ? 'true' : 'false');
         Array.prototype.forEach.call(card.querySelectorAll('a'), function (link) {
           if (isFront) link.removeAttribute('tabindex');
@@ -145,7 +148,10 @@
     root.addEventListener('wheel', function (event) {
       event.preventDefault();
       hideHint();
-      wheelCarry += event.deltaY;
+      var delta = event.deltaY;
+      if (event.deltaMode === 1) delta *= 16;
+      if (event.deltaMode === 2) delta *= 400;
+      wheelCarry += delta;
       if (Math.abs(wheelCarry) < WHEEL_THRESHOLD) return;
       step(wheelCarry > 0 ? 1 : -1);
     }, { passive: false });
@@ -169,17 +175,20 @@
     root.addEventListener('pointerdown', function (event) {
       if (event.pointerType === 'mouse' && event.button !== 0) return;
       if (event.target.closest('.project-wheel-dot')) return;
+      if (event.target.closest('a')) return;
       dragging = true;
       suppressClick = false;
       pointerStartY = event.clientY;
       pointerLastY = event.clientY;
-      try { root.setPointerCapture(event.pointerId); } catch (e) {}
     });
 
     root.addEventListener('pointermove', function (event) {
       if (!dragging || pointerStartY == null) return;
       pointerLastY = event.clientY;
-      if (Math.abs(pointerLastY - pointerStartY) > 8) suppressClick = true;
+      if (Math.abs(pointerLastY - pointerStartY) > 8) {
+        suppressClick = true;
+        try { root.setPointerCapture(event.pointerId); } catch (e) {}
+      }
     });
 
     function endPointer(event) {
@@ -204,6 +213,12 @@
     });
 
     root.addEventListener('click', function (event) {
+      var link = event.target.closest('a');
+      var card = event.target.closest('.card');
+      var active = roundedIndex(target);
+
+      if (link && card && Number(card.dataset.wheelIndex) === active) return;
+
       if (suppressClick) {
         event.preventDefault();
         event.stopPropagation();
@@ -211,8 +226,6 @@
         return;
       }
       if (event.target.closest('.project-wheel-controls')) return;
-      var active = roundedIndex(target);
-      var card = event.target.closest('.card');
       if (card && root.contains(card)) {
         var index = Number(card.dataset.wheelIndex);
         if (index === active) return;
@@ -227,7 +240,6 @@
       else if (event.clientY > rect.bottom) step(1);
     });
 
-    root.classList.add('is-ready');
     render();
   }
 
