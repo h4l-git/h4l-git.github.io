@@ -1,3 +1,10 @@
+@font-face {
+font-family: "Andy";
+src: url("fonts/andy-bold.ttf") format("truetype");
+font-weight: 400 700;
+font-display: swap;
+}
+
 :root {
 --bg: #ffffff;
 --bg-alt: #f5f6f8;
@@ -7,28 +14,59 @@
 --accent-contrast: #ffffff;
 --border: #e3e5ea;
 --max-width: 780px;
+--sky-top: #7fbcff;
+--sky-bottom: #dcefff;
+--bar: rgba(255, 255, 255, 0.6);
+--gold: #ffd84a;
+--outline: #1b1530;
+--panel: rgba(54, 72, 150, 0.9);
+--panel-border: #1c2554;
+--panel-text: #ffffff;
+--panel-muted: #cdd6ff;
+--night-scene: none;
+--ground-filter: none;
 }
 
 @media (prefers-color-scheme: dark) {
 :root:not([data-theme="light"]) {
---bg: #14161a;
---bg-alt: #1c1f25;
---text: #edeef0;
---text-muted: #a2a8b4;
---accent: #7c9bff;
---accent-contrast: #0e1116;
---border: #2a2e36;
+/* Terraria night sky */
+--bg: #0a0f26;
+--bg-alt: #141d3e;
+--text: #e8ecf8;
+--text-muted: #a9b4d2;
+--accent: #8fb0ff;
+--accent-contrast: #0a0f26;
+--border: #24305a;
+--sky-top: #040714;
+--sky-bottom: #1b2d62;
+--bar: rgba(5, 9, 28, 0.75);
+--outline: #05060f;
+--panel: rgba(42, 60, 134, 0.9);
+--panel-border: #0d1538;
+--panel-muted: #cdd6ff;
+--night-scene: block;
+--ground-filter: brightness(0.78) saturate(0.9);
 }
 }
 
 :root[data-theme="dark"] {
---bg: #14161a;
---bg-alt: #1c1f25;
---text: #edeef0;
---text-muted: #a2a8b4;
---accent: #7c9bff;
---accent-contrast: #0e1116;
---border: #2a2e36;
+/* Terraria night sky */
+--bg: #0a0f26;
+--bg-alt: #141d3e;
+--text: #e8ecf8;
+--text-muted: #a9b4d2;
+--accent: #8fb0ff;
+--accent-contrast: #0a0f26;
+--border: #24305a;
+--sky-top: #040714;
+--sky-bottom: #1b2d62;
+--bar: rgba(5, 9, 28, 0.75);
+--outline: #05060f;
+--panel: rgba(42, 60, 134, 0.9);
+--panel-border: #0d1538;
+--panel-muted: #cdd6ff;
+--night-scene: block;
+--ground-filter: brightness(0.78) saturate(0.9);
 }
 
 * { box-sizing: border-box; }
@@ -39,14 +77,51 @@ height: 100%;
 
 body {
 margin: 0;
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-background: var(--bg);
+font-family: "Andy", "Comic Sans MS", cursive;
+font-size: 1.2rem;
+letter-spacing: 0.01em;
+background: var(--bg) linear-gradient(to bottom, var(--sky-top), var(--sky-bottom)) fixed;
 color: var(--text);
 line-height: 1.6;
 min-height: 100vh;
 min-height: 100dvh;
 display: flex;
 flex-direction: column;
+}
+
+/* Night scenery (dark mode only): moon, stars and hills behind the page */
+body::before,
+body::after,
+html::before {
+content: "";
+display: var(--night-scene, none);
+position: fixed;
+inset: 0;
+z-index: -1;
+pointer-events: none;
+image-rendering: pixelated;
+}
+
+body::before {
+background:
+url("images/night/moon.svg") right 12% top 14% / 96px 96px no-repeat,
+url("images/night/stars.svg") 0 0 / 400px 400px repeat;
+}
+
+html::before {
+background: url("images/night/stars-twinkle.svg") 120px 60px / 400px 400px repeat;
+animation: star-twinkle 3.2s steps(2, jump-none) infinite alternate;
+}
+
+body::after {
+top: auto;
+height: 192px;
+background: url("images/night/hills.svg") 0 100% / 480px 192px repeat-x;
+}
+
+@keyframes star-twinkle {
+from { opacity: 0.25; }
+to { opacity: 1; }
 }
 
 .wrap {
@@ -58,10 +133,23 @@ padding: 0 24px;
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+/* Terraria-style text: light fill with a hard dark outline */
+.outlined,
+.logo,
+.hero h1,
+.page-main h2,
+.about-content h2 {
+text-shadow:
+2px 0 var(--outline), -2px 0 var(--outline), 0 2px var(--outline), 0 -2px var(--outline),
+2px 2px var(--outline), -2px -2px var(--outline), 2px -2px var(--outline), -2px 2px var(--outline);
+}
+
 .site-header {
 position: sticky;
 top: 0;
-background: var(--bg);
+background: var(--bar);
+-webkit-backdrop-filter: blur(6px);
+backdrop-filter: blur(6px);
 border-bottom: 1px solid var(--border);
 z-index: 10;
 }
@@ -75,9 +163,10 @@ padding-bottom: 14px;
 }
 
 .logo {
-font-weight: 700;
-font-size: 1.1rem;
-color: var(--text);
+font-size: 1.6rem;
+line-height: 1;
+letter-spacing: 0.06em;
+color: var(--gold);
 }
 .logo:hover { text-decoration: none; }
 
@@ -93,9 +182,9 @@ align-items: center;
 justify-content: center;
 background: transparent;
 border: none;
-border-radius: 999px;
-width: 30px;
-height: 30px;
+border-radius: 6px;
+width: 38px;
+height: 38px;
 padding: 0;
 font-family: inherit;
 color: var(--text);
@@ -108,7 +197,7 @@ line-height: 1;
 nav a {
 color: var(--text-muted);
 margin-left: 20px;
-font-size: 0.95rem;
+font-size: 1.2rem;
 }
 nav a:hover { color: var(--text); text-decoration: none; }
 
@@ -130,18 +219,54 @@ text-align: center;
 .eyebrow {
 color: var(--text-muted);
 margin: 0 0 4px;
-font-size: 1rem;
+font-size: 1.4rem;
 }
 
 .hero h1 {
-font-size: 2.6rem;
-margin: 0 0 8px;
+font-size: 4.2rem;
+font-weight: 400;
+line-height: 1;
+letter-spacing: 0.03em;
+color: var(--gold);
+margin: 0 0 12px;
 }
 
 .tagline {
 color: var(--accent);
-font-weight: 600;
+font-size: 1.35rem;
 margin: 0;
+}
+
+/* Pixel-art Harry standing on a grass block */
+.pixel-stage {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin: 0 auto 24px;
+}
+
+.pixel-me {
+display: block;
+width: 84px;
+height: 161px;
+image-rendering: pixelated;
+animation: pixel-bob 1.2s steps(2, jump-none) infinite;
+}
+
+.pixel-ground {
+display: block;
+width: 192px;
+height: 64px;
+/* overlap one grass pixel so the feet stand among the tufts */
+margin-top: -8px;
+position: relative;
+image-rendering: pixelated;
+filter: var(--ground-filter, none);
+}
+
+@keyframes pixel-bob {
+0% { transform: translateY(0); }
+100% { transform: translateY(-6px); }
 }
 
 .hero-blurb {
@@ -160,8 +285,7 @@ justify-content: center;
 display: inline-block;
 padding: 10px 20px;
 border-radius: 8px;
-font-weight: 600;
-font-size: 0.95rem;
+font-size: 1.1rem;
 }
 .btn:hover { text-decoration: none; }
 
@@ -183,8 +307,21 @@ padding: 48px 0 64px;
 }
 
 .page-main h2 {
-font-size: 1.5rem;
+font-size: 2.6rem;
+font-weight: 400;
+color: var(--gold);
 margin: 0 0 20px;
+}
+
+.about-content {
+padding-top: 40px;
+padding-bottom: 48px;
+}
+
+.about-content h2 {
+font-size: 2rem;
+font-weight: 400;
+color: var(--gold);
 }
 
 .projects-page {
@@ -353,34 +490,66 @@ gap: 20px;
 }
 
 .card {
-background: var(--bg-alt);
-border: 1px solid var(--border);
-border-radius: 12px;
+background: var(--panel);
+border: 3px solid var(--panel-border);
+border-radius: 8px;
+box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12);
+color: var(--panel-text);
 padding: 20px;
 }
 
 .card h3 {
 margin: 0 0 8px;
-font-size: 1.1rem;
+font-size: 1.7rem;
+font-weight: 400;
+color: var(--gold);
+text-shadow:
+2px 0 var(--outline), -2px 0 var(--outline), 0 2px var(--outline), 0 -2px var(--outline);
+}
+
+.card-title {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.project-icon {
+width: 48px;
+height: 48px;
+flex-shrink: 0;
+image-rendering: pixelated;
+filter: drop-shadow(2px 2px 0 var(--outline));
 }
 
 .card p {
-color: var(--text-muted);
+color: var(--panel-muted);
 margin: 0 0 14px;
-font-size: 0.95rem;
+font-size: 1.15rem;
 }
 
 .card-links a {
-font-size: 0.9rem;
-font-weight: 600;
-margin-right: 16px;
+display: inline-block;
+font-size: 1.1rem;
+color: var(--panel-text);
+background: rgba(18, 24, 66, 0.55);
+border: 2px solid var(--panel-border);
+border-radius: 6px;
+padding: 2px 12px;
+margin-right: 8px;
+}
+
+.card-links a:hover {
+color: var(--gold);
+text-decoration: none;
+border-color: var(--gold);
 }
 
 .site-footer {
 border-top: 1px solid var(--border);
+background: var(--bar);
 padding: 16px 0;
 color: var(--text-muted);
-font-size: 0.85rem;
+font-size: 1.05rem;
 flex-shrink: 0;
 overflow: hidden;
 position: relative;
@@ -407,8 +576,17 @@ margin: 0;
 padding: 0;
 }
 
-.footer-links a {
+.footer-links a,
+.footer-copy a {
 color: var(--text-muted);
+}
+
+.footer-copy a {
+text-decoration: underline;
+}
+
+.footer-copy a:hover {
+color: var(--text);
 }
 
 .footer-links a:hover {
@@ -420,6 +598,8 @@ text-decoration: none;
 cursor: pointer;
 pointer-events: auto;
 position: relative;
+/* Andy sits high in its line box; nudge it to line up with the icons */
+top: 0.15em;
 z-index: 1;
 }
 
@@ -449,7 +629,13 @@ display: block;
 .header-inner { flex-direction: column; gap: 8px; }
 nav a { margin: 0 10px; }
 .hero { padding: 24px 0; }
-.hero h1 { font-size: 2rem; }
+.hero h1 { font-size: 3.2rem; }
+.pixel-me { width: 72px; height: 138px; }
+body::before {
+background:
+url("images/night/moon.svg") right 4% top 13% / 64px 64px no-repeat,
+url("images/night/stars.svg") 0 0 / 400px 400px repeat;
+}
 .footer-inner { gap: 12px; }
 .footer-links { margin-left: auto; }
 .project-wheel { height: min(480px, calc(100dvh - 220px)); min-height: 380px; }
@@ -457,6 +643,8 @@ nav a { margin: 0 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+html::before { animation: none; }
+.pixel-me { animation: none; }
 .project-wheel {
 height: auto;
 min-height: 0;
