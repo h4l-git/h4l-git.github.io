@@ -31,8 +31,59 @@
     var btn = document.getElementById('theme-toggle');
     if (!btn) return;
 
-    var SUN_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
-    var MOON_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+    // Pixel-art sun and moon, one character per pixel (see PALETTES).
+    var SUN_PIXELS = [
+      '.......rr.......',
+      '.......rr.......',
+      '..r..........r..',
+      '...r..oooo..r...',
+      '.....oWWMMo.....',
+      '....oWWMMMMo....',
+      '...oWWMMMMMMo...',
+      'rr.oWMMMMMMMo.rr',
+      'rr.oMMMMMMMyo.rr',
+      '...oMMMMMMyyo...',
+      '....oMMMMyyo....',
+      '.....oMMyyo.....',
+      '...r..oooo..r...',
+      '..r..........r..',
+      '.......rr.......',
+      '.......rr.......'
+    ];
+    var MOON_PIXELS = [
+      '................',
+      '......o.........',
+      '....oomo........',
+      '...oMMmo........',
+      '..oMMmo.........',
+      '.oMMMmo.........',
+      '.oMMMmo.........',
+      '.oMMMmo.........',
+      '.oMMMMmo........',
+      '.oMcMMMmooooo...',
+      '.oMMcMMMMMMMmo..',
+      '..oMMMMMMMMmo...',
+      '...oMcMMMMmo....',
+      '....ooMMmoo.....',
+      '......ooo.......',
+      '................'
+    ];
+    var SUN_PALETTE = { o: '#b06010', M: '#ffd83a', y: '#ffb000', W: '#fff6b0', r: '#ffc21a' };
+    var MOON_PALETTE = { o: '#5c6282', M: '#eaecf6', m: '#c8cde0', c: '#b0b5cc' };
+
+    function pixelSvg(rows, palette) {
+      var rects = '';
+      for (var y = 0; y < rows.length; y++) {
+        for (var x = 0; x < rows[y].length; x++) {
+          var color = palette[rows[y].charAt(x)];
+          if (color) rects += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + color + '"/>';
+        }
+      }
+      return '<svg viewBox="0 0 16 16" width="32" height="32" shape-rendering="crispEdges" aria-hidden="true">' + rects + '</svg>';
+    }
+
+    var SUN_ICON = pixelSvg(SUN_PIXELS, SUN_PALETTE);
+    var MOON_ICON = pixelSvg(MOON_PIXELS, MOON_PALETTE);
 
     function updateButton() {
       var current = effectiveTheme();

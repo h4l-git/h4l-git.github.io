@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HAL.io | Projects</title>
 <meta name="description" content="Personal portfolio and resume site.">
+<link rel="preload" href="fonts/andy-bold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script src="hal-favicon.js"></script>
 <script src="theme-toggle.js"></script>
@@ -18,7 +19,7 @@
 <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
 </div>
 <nav>
-<a href="about.html">About</a>
+<a href="about.html">About me</a>
 <a href="projects.html">Projects</a>
 </nav>
 </div>
@@ -37,7 +38,7 @@
 <div class="project-wheel-stage">
 
 <article class="card">
-<h3>Jot_</h3>
+<h3 class="card-title"><img class="project-icon" src="images/projects/jot.png" alt="" width="24" height="24">Jot_</h3>
 <p>The all in one Email/note scribing desktop app powered by Claude Sonnet.</p>
 <div class="card-links">
 
@@ -48,7 +49,7 @@
 </article>
 
 <article class="card">
-<h3>ResearchRef</h3>
+<h3 class="card-title"><img class="project-icon" src="images/projects/researchref.png" alt="" width="24" height="24">ResearchRef</h3>
 <p>ResearchRef given several research article links, can generate a fully valid reference list to paste onto any scientific research paper/article</p>
 <div class="card-links">
 <a href="https://h4l-git.github.io/ResearchRef/" target="_blank">Website</a>
@@ -58,23 +59,38 @@
 </article>
 
 <article class="card">
-<h3>Commuter</h3>
-<p>Commuter is a Google Chrome extension that identifies job adverts on job boards and plans the route to and from the workplace</p>
+<h3 class="card-title"><img class="project-icon" src="images/projects/beeline.png" alt="" width="24" height="24">BeeLine</h3>
+<p>BeeLine is a Google Chrome extension that identifies job adverts on job boards and plans the route to and from the workplace</p>
 <div class="card-links">
-<a href="https://h4l-git.github.io/Commuter/" target="_blank">About</a>
-<a href="https://github.com/h4l-git/Commuter/blob/main/popup.html" target="_blank">Code</a>
-<a href="https://github.com/h4l-git/Commuter" target="_blank">Repo</a>
+<a href="https://h4l-git.github.io/BeeLine/" target="_blank">About</a>
+<a href="https://github.com/h4l-git/BeeLine/blob/main/popup.html" target="_blank">Code</a>
+<a href="https://github.com/h4l-git/BeeLine" target="_blank">Repo</a>
 </div>
 </article>
 
 <article class="card">
-<h3>Glyph</h3>
+<h3 class="card-title"><img class="project-icon" src="images/projects/glyph.png" alt="" width="24" height="24">Glyph</h3>
 <p>A chrome extension that allows image snipping of text to determine its font powered by Claude.</p>
 <div class="card-links">
 <a href="https://h4l-git.github.io/Glyph/" target="_blank">About</a>
 <a href="https://github.com/h4l-git/Glyph/blob/main/popup.html" target="_blank">Code</a>
 <a href="https://github.com/h4l-git/Glyph" target="_blank">Repo</a>
 </div>
+</article>
+
+<article class="card">
+<h3 class="card-title"><img class="project-icon" src="images/projects/mooxr.png" alt="" width="24" height="24">Mooxr</h3>
+<p>A Windows app and Chrome extension that turns a video file or link into a 320&nbsp;kbps MP3 with the title, artist and cover art filled in, saved straight into Spotify&rsquo;s Local Files.</p>
+<div class="card-links">
+<a href="https://h4l-git.github.io/Mooxr/" target="_blank">Website</a>
+<a href="https://github.com/h4l-git/Mooxr/tree/main/mooxr" target="_blank">Code</a>
+<a href="https://github.com/h4l-git/Mooxr" target="_blank">Repo</a>
+</div>
+</article>
+
+<article class="card">
+<h3 class="card-title"><img class="project-icon" src="images/projects/stoa.png" alt="" width="24" height="24">Stoa</h3>
+<p>A desktop study/work timer with a to-do list, Focus, Pomodoro, Lock In and Flow timer modes, and inspirational quotes that rotate while you work.</p>
 </article>
 
 </div>
@@ -89,7 +105,7 @@
 
 <footer class="site-footer">
 <div class="wrap footer-inner">
-<p class="footer-copy">&copy; <span id="year"></span> Harry Lees. Powered with GitHub Pages.</p>
+<p class="footer-copy">&copy; <span id="year"></span> Harry Lees. Powered with <a href="https://docs.github.com/en/pages" target="_blank" rel="noopener">GitHub Pages</a>.</p>
 <div class="footer-links" id="contact">
 <a class="footer-email" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=harryalees@me.com" target="_blank" rel="noopener" aria-label="Email harryalees@me.com">harryalees@me.com</a>
 <a class="footer-icon" href="https://github.com/h4l-git" target="_blank" rel="noopener" aria-label="GitHub">
