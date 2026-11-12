@@ -167,6 +167,9 @@ font-size: 1.6rem;
 line-height: 1;
 letter-spacing: 0.06em;
 color: var(--gold);
+/* Andy's descent is larger than its ascent, so the caps sit high in the line box; nudge down to optically center with the theme toggle */
+position: relative;
+top: 0.14em;
 }
 .logo:hover { text-decoration: none; }
 
